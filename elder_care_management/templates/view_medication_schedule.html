@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Medication Schedule</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        /* General button styles */
+        button, a.button {
+            display: inline-block;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* View button */
+        a.button-view {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        a.button-view:hover {
+            background-color: #45a049;
+        }
+
+        /* Edit button */
+        a.button-edit {
+            background-color: #2196F3; /* Blue */
+            color: white;
+        }
+
+        a.button-edit:hover {
+            background-color: #0b7dda;
+        }
+
+        /* Delete button */
+        a.button-delete {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+        a.button-delete:hover {
+            background-color: #da190b;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Medication Schedule</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landingPage' %}">Home</a></li>
+                <li><a href="{% url 'add-medication' %}">Add Medication</a></li>
+                <li><a href="{% url 'view-medication-schedule' %}">View Schedule</a></li>
+                <li><a href="{% url 'export-medication-schedule' %}">Export Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="section">
+            <h2>Patient List</h2>
+            {% if patients %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Date of Birth</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.dob }}</td>
+                        <td>
+                            <a href="{% url 'view-patient-medications' patient.id %}" class="button button-view">View Medications</a>
+                        </td>                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="no-data">No patients found.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Elder Care Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medication</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Medication Schedule Management</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landingPage' %}">Home</a></li>
+                <li><a href="{% url 'add-medication' %}">Add Medication</a></li>
+                <li><a href="{% url 'view-medication-schedule' %}">View Schedule</a></li>
+                <li><a href="{% url 'export-medication-schedule' %}">Export Schedule</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="add-medication" class="section">
+            <h2>Add Medication</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="patient">Patient Name:</label><br>
+                <select id="patient" name="patient">
+                    {% for record in health_records %}
+                        <option value="{{ record.id }}">{{ record.name }}</option>
+                    {% endfor %}
+                </select><br><br>
+            
+                <label for="medication-name">Medication Name:</label><br>
+                <input type="text" id="medication-name" name="medication-name" placeholder="Enter medication name" required><br><br>
+            
+                <label for="dose">Dose:</label><br>
+                <input type="text" id="dose" name="dose" placeholder="e.g., 500mg" required><br><br>
+            
+                <label for="frequency">Frequency:</label><br>
+                <select id="frequency" name="frequency" required>
+                    <option value="once">Once a day</option>
+                    <option value="twice">Twice a day</option>
+                    <option value="thrice">Thrice a day</option>
+                </select><br><br>
+            
+                <label for="time">Time:</label><br>
+                <input type="time" id="time" name="time" required><br><br>
+            
+                <button type="submit">Add Medication</button>
+            </form>
+            
+            
+        </section>
+        <section id="view-schedule" class="section">
+            <h2>View Schedule</h2>
+            <p>Browse and manage the medication schedule for all patients.</p>
+            <a href="{% url 'view-medication-schedule' %}"><button>View Schedule</button></a>
+        </section>
+        
+        <section id="export-schedule" class="section">
+            <h2>Export Schedule</h2>
+            <p>Export the current medication schedule for external use or backup.</p>
+            <a href="{% url 'export-medication-schedule' %}"><button>Export Schedule</button></a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Elder Care Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

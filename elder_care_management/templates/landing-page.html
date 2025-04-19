@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elder Care Management System</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Elder Care Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'landingPage' %}">Home</a></li>
+                <li><a href="{% url 'health-records' %}">Health Records</a></li>
+                <li><a href="{% url 'view-medication-schedule' %}">Medication Schedule</a></li>
+                <li><a href="#caregiver-tracking">Caregiver Tracking</a></li>
+                <li><a href="#emergency-contacts">Emergency Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="health-records" class="section">
+            <h2>Add a new Health Records</h2>
+            <p>Add health record.</p>
+            <a href="{% url 'health-records' %}"><button>Health Records</button></a>
+        </section>
+        <section id="health-records" class="section">
+            <h2>Comprehensive Health Records</h2>
+            <p>Track and update medical history, current conditions, and test results.</p>
+            <a href="{% url 'view-records' %}"><button>View Health Records</button></a>
+        </section>
+        <section id="medication-schedule" class="section">
+            <h2>Medication Schedule Management</h2>
+            <p>Monitor and update medication schedules to ensure adherence.</p>
+            <a href="{% url 'add-medication' %}"><button>Manage Schedule</button></a>
+        </section>
+        <section id="view-schedule" class="section">
+            <h2>View Schedule</h2>
+            <p>Browse and manage the medication schedule for all patients.</p>
+            <a href="{% url 'view-medication-schedule' %}"><button>View Schedule</button></a>
+        </section>
+        <section id="caregiver-tracking" class="section">
+            <h2>Caregiver Assignment Tracking</h2>
+            <p>Assign, update, and track caregivers for individual care recipients.</p>
+            <button>Track Caregivers</button>
+        </section>
+        <section id="emergency-contacts" class="section">
+            <h2>Emergency Contact Database</h2>
+            <p>Maintain a list of emergency contacts with quick access during emergencies.</p>
+            <button>View Contacts</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Elder Care Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

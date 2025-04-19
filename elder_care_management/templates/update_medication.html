@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Medication</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        @media (max-width: 600px) {
+            form input, form textarea, form select, button {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 8px 15px;
+            }
+
+            main {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Update Medication</h1>
+    </header>
+    <main>
+        <section class="section">
+            <h2>Edit Medication Details</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="medication-name">Medication Name:</label>
+                <input type="text" id="medication-name" name="medication-name" value="{{ medication.name }}" required>
+
+                <label for="dose">Dose:</label>
+                <input type="text" id="dose" name="dose" value="{{ medication.dose }}" required>
+
+                <label for="frequency">Frequency:</label>
+                <select id="frequency" name="frequency" required>
+                    {% for key, value in medication.FREQUENCY_CHOICES %}
+                    <option value="{{ key }}" {% if medication.frequency == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" value="{{ medication.time|time:'H:i' }}" required>
+
+                <button type="submit">Update</button>
+                <a href="{% url 'view-patient-medications' medication.health_record.id %}">
+                    <button type="button" style="background-color: #ccc; color: #333;">Cancel</button>
+                </a>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Elder Care Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
